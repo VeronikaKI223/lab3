@@ -1,0 +1,73 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Кімнати</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="container">
+        <h1>Кімнати</h1>
+
+        <form action="/rooms/execute-query" method="post" class="form-container">
+            <label for="sqlQuery">Введіть запит SQL:</label>
+            <input type="text" id="sqlQuery" name="sqlQuery" placeholder="Enter SQL Query" required>
+            <!-- Застосовано стиль кнопки -->
+            <button type="submit" class="button">Виконати запит</button>
+        </form>
+
+        <div th:if="${queryResult != null && !queryResult.isEmpty()}">
+            <h2>Результат запиту:</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th th:each="column : ${queryResult[0].keySet()}" th:text="${column}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row : ${queryResult}">
+                    <td th:each="cell : ${row.values()}" th:text="${cell}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${queryResult == null || queryResult.isEmpty()}">
+            <p>Немає результатів для відображення. Введіть дійсний запит SQL.</p>
+        </div>
+
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+        <div th:if="${errorMessage}">
+            <p style="color:red;" th:text="${errorMessage}"></p>
+        </div>
+
+        <a href="/rooms/add" class="button">Додати нову кімнату</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер у списку</th>
+                    <th>Номер кімнати</th>
+                    <th>Блок</th>
+                    <th>Скільки людей проживає</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="room : ${rooms}">
+                    <td th:text="${room.roomId}"></td>
+                    <td th:text="${room.roomNumber}"></td>
+                    <td th:text="${room.block.blockName}"></td>
+                    <td th:text="${room.capacity}"></td>
+                    <td>
+                        <a th:href="@{/rooms/edit/{id}(id=${room.roomId})}" class="button edit">Редагувати</a>
+                        <a th:href="@{/rooms/delete/{id}(id=${room.roomId})}" class="button delete">Видалити</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/home" class="button back">Повернутися на головну сторінку</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Мешканці</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="container">
+        <h1>Мешканці</h1>
+        <a href="/residents/add" class="button">Додати нового мешканця</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер у списку</th>
+                    <th>ПІБ</th>
+                    <th>Кімната</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="resident : ${residents}">
+                    <td th:text="${resident.residentId}"></td>
+                    <td th:text="${resident.fullName}"></td>
+                    <td th:text="${resident.room.roomNumber}"></td>
+                    <td>
+                        <a th:href="@{/residents/edit/{id}(id=${resident.residentId})}" class="button edit">Редагувати</a>
+                        <a th:href="@{/residents/delete/{id}(id=${resident.residentId})}" class="button delete">Видалити</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/home" class="button back">Повернутися на головну сторінку</a>
+    </div>
+</body>
+</html>

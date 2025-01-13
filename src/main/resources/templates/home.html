@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Управління гуртожитком</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="container" style="text-align: center;">
+        <h1>Ласкаво просимо до системи управління гуртожитком</h1>
+        <h2>Легко керуйте блоками, кімнатами та мешканцями у гуртожитку</h2>
+        
+        <div class="navigation">
+            <a th:href="@{/blocks}" class="button">Блоки</a>
+            <a th:href="@{/rooms}" class="button">Кімнати</a>
+            <a th:href="@{/residents}" class="button">Мешканці</a>
+        </div>
+    </div>
+</body>
+</html>

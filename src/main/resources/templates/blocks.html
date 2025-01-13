@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Блоки</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="container">
+        <h1>Блоки</h1>
+        <a href="/blocks/add" class="button">Додати новий блок</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер у списку</th>
+                    <th>Назва</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="block : ${blocks}">
+                    <td th:text="${block.blockId}"></td>
+                    <td th:text="${block.blockName}"></td>
+                    <td>
+                        <a th:href="@{/blocks/edit/{id}(id=${block.blockId})}" class="button edit">Редагувати</a>
+                        <a th:href="@{/blocks/delete/{id}(id=${block.blockId})}" class="button delete">Видалити</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/home" class="button back">Повернутися на головну сторінку</a>
+    </div>
+</body>
+</html>
